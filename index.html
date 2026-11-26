@@ -1,0 +1,1703 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Hành Trình Chinh Phục Đỉnh Cao Số Oxi Hóa - Hóa Học 10</title>
+  <!-- Google Fonts: Nunito & Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Nunito', 'sans-serif'],
+            display: ['Space Grotesk', 'Nunito', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* =========================================================================
+       1. THIẾT LẬP CHUNG & BẢO VỆ HIỂN THỊ MOBILE-FIRST
+       ========================================================================= */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      overflow-x: hidden;
+      background: radial-gradient(circle at 15% 10%, #1E1B4B 0%, #0F172A 55%, #091E2C 100%);
+      color: #F8FAFC;
+      font-family: 'Nunito', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    p, span, div, button, h1, h2, h3, h4, label {
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      word-break: normal;
+      white-space: normal;
+    }
+
+    sub, sup {
+      font-size: 72%;
+      line-height: 0;
+      position: relative;
+      vertical-align: baseline;
+    }
+    sup { top: -0.48em; }
+    sub { bottom: -0.22em; }
+
+    /* =========================================================================
+       2. KÍ HIỆU SỐ OXI HÓA CHUẨN GDPT 2018 (THẲNG ĐỨNG NGAY TRÊN ĐẦU NGUYÊN TỐ)
+       ========================================================================= */
+    .chem-formula {
+      display: inline-flex;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 1px;
+      line-height: 1.1;
+      vertical-align: baseline;
+      padding-top: 2px;
+    }
+
+    .ox-el {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      margin: 0 1px;
+      vertical-align: bottom;
+    }
+
+    .ox-num {
+      display: inline-block;
+      font-family: 'Space Grotesk', 'Nunito', sans-serif;
+      font-size: 0.72em;
+      font-weight: 800;
+      line-height: 1;
+      padding: 2px 5px;
+      border-radius: 6px;
+      margin-bottom: 3px;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    }
+
+    /* Màu sắc số oxi hóa rực rỡ, tương phản cao */
+    .ox-pos {
+      background: linear-gradient(135deg, #F59E0B, #EA580C);
+      color: #FFFFFF;
+      border: 1px solid #FDE68A;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    }
+
+    .ox-neg {
+      background: linear-gradient(135deg, #06B6D4, #0284C7);
+      color: #FFFFFF;
+      border: 1px solid #A5F3FC;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    }
+
+    .ox-zero {
+      background: linear-gradient(135deg, #E2E8F0, #CBD5E1);
+      color: #0F172A;
+      border: 1px solid #FFFFFF;
+    }
+
+    .ox-target {
+      background: linear-gradient(135deg, #EC4899, #8B5CF6);
+      color: #FFFFFF;
+      border: 1.5px solid #FBCFE8;
+      animation: pulseBadge 1.5s infinite;
+    }
+
+    .ox-sym {
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    /* =========================================================================
+       3. HIỆU ỨNG HOẠT ẢNH & TƯƠNG TÁC CHẠM
+       ========================================================================= */
+    @keyframes pulseBadge {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.6); }
+      50% { transform: scale(1.08); box-shadow: 0 0 0 6px rgba(236, 72, 153, 0); }
+    }
+
+    @keyframes floatIcon {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+    .animate-float {
+      animation: floatIcon 3s ease-in-out infinite;
+    }
+
+    @keyframes slideIn {
+      0% { opacity: 0; transform: translateY(12px) scale(0.98); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .animate-slide {
+      animation: slideIn 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .touch-btn {
+      min-height: 48px;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.14s ease, background-color 0.18s ease, border-color 0.18s ease;
+    }
+    .touch-btn:active:not(:disabled) {
+      transform: scale(0.975);
+    }
+
+    /* Thẻ kính nổi bật trên nền vũ trụ */
+    .glass-card {
+      background: rgba(30, 41, 59, 0.88);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      box-shadow: 0 18px 38px -12px rgba(0, 0, 0, 0.55);
+    }
+
+    .light-panel {
+      background: #FFFFFF;
+      color: #0F172A;
+      border: 1px solid #E2E8F0;
+      box-shadow: 0 16px 35px -10px rgba(15, 23, 42, 0.45);
+    }
+
+    #confetti-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+  <!-- Canvas pháo hoa chiến thắng -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Khung chứa chính Mobile-First (max-width: 540px) -->
+  <div class="w-full max-w-[540px] mx-auto px-3 sm:px-4 py-3 sm:py-5 flex-grow flex flex-col">
+
+    <!-- HEADER THANH TRẠNG THÁI, COMBO & LEO NÚI (Ẩn ở màn hình khởi hành) -->
+    <header id="game-hud" class="hidden glass-card rounded-2xl p-3.5 mb-4 sticky top-2 z-40">
+      <div class="flex items-center justify-between gap-2 mb-2.5">
+        <div class="flex items-center gap-2.5 min-w-0">
+          <div id="hud-avatar" class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center text-xl shadow flex-shrink-0">
+            ⚗️
+          </div>
+          <div class="leading-tight min-w-0">
+            <div id="hud-player-name" class="font-extrabold text-sm sm:text-base text-white">Nhà Giả Kim</div>
+            <div id="hud-player-role" class="text-xs font-bold text-cyan-300">Lớp 10</div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-1.5 flex-shrink-0">
+          <!-- Bộ đếm Combo -->
+          <div id="hud-combo-badge" class="hidden px-2.5 py-1.5 rounded-xl bg-fuchsia-600/90 border border-fuchsia-300/60 text-white font-black text-xs flex items-center gap-1 shadow">
+            <span>🔥</span><span id="hud-combo-val">x2</span>
+          </div>
+
+          <!-- Nút âm thanh -->
+          <button id="sound-btn" onclick="toggleSound()" aria-label="Bật hoặc tắt âm thanh"
+            class="w-10 h-10 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-600 flex items-center justify-center text-lg transition active:scale-95">
+            🔊
+          </button>
+
+          <!-- Điểm tổng -->
+          <div class="bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 px-3 py-1.5 rounded-xl font-black flex items-center gap-1 shadow">
+            <span class="text-sm">⭐</span>
+            <span id="hud-score" class="text-base sm:text-lg">0</span>
+            <span class="text-xs opacity-85">/100đ</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thanh tiến trình leo đỉnh núi tri thức -->
+      <div>
+        <div class="flex items-center justify-between text-xs font-bold mb-1.5">
+          <span id="hud-stage-name" class="text-amber-300">Chặng 1/5</span>
+          <span id="hud-pct-label" class="text-cyan-300">0%</span>
+        </div>
+        <div class="w-full h-2.5 bg-slate-900 rounded-full overflow-hidden p-0.5 border border-slate-700">
+          <div id="hud-progress-bar" class="h-full bg-gradient-to-r from-cyan-400 via-amber-400 to-orange-500 rounded-full transition-all duration-500" style="width: 10%;"></div>
+        </div>
+        <!-- 5 trạm leo núi -->
+        <div class="grid grid-cols-5 gap-1.5 mt-2">
+          <div id="step-dot-1" class="h-2 rounded-full bg-amber-400 transition-all"></div>
+          <div id="step-dot-2" class="h-1.5 rounded-full bg-slate-700 transition-all"></div>
+          <div id="step-dot-3" class="h-1.5 rounded-full bg-slate-700 transition-all"></div>
+          <div id="step-dot-4" class="h-1.5 rounded-full bg-slate-700 transition-all"></div>
+          <div id="step-dot-5" class="h-1.5 rounded-full bg-slate-700 transition-all"></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- KHU VỰC HIỂN THỊ CHÍNH -->
+    <main id="app-main" class="flex-grow flex flex-col justify-center">
+      <!-- Render động qua JS -->
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="text-center text-xs text-slate-400 mt-5 pb-2 font-semibold">
+      Hóa học 10 (GDPT 2018) • Rèn Kĩ Năng Xác Định Số Oxi Hóa
+    </footer>
+  </div>
+
+  <!-- HỘP THÔNG BÁO TOAST (KHÔNG DÙNG ALERT) -->
+  <div id="toast-box" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 hidden w-[92%] max-w-[460px]">
+    <div class="bg-slate-900/95 text-white px-4 py-3.5 rounded-2xl shadow-2xl border border-amber-400/60 flex items-center gap-3 backdrop-blur-md">
+      <span id="toast-emoji" class="text-xl flex-shrink-0">💡</span>
+      <p id="toast-msg" class="text-sm font-bold leading-snug"></p>
+    </div>
+  </div>
+
+  <script>
+    /* =========================================================================
+       1. HỆ THỐNG ÂM THANH WEB AUDIO API (VUI TAI, KHÔNG CẦN FILE NGOÀI)
+       ========================================================================= */
+    let audioEnabled = true;
+    let audioCtx = null;
+
+    function initAudio() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext) audioCtx = new AudioContext();
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function toggleSound() {
+      audioEnabled = !audioEnabled;
+      const btn = document.getElementById('sound-btn');
+      if (btn) btn.textContent = audioEnabled ? '🔊' : '🔇';
+      if (audioEnabled) {
+        initAudio();
+        playTone(720, 'sine', 0.09, 0.16, 0);
+      }
+    }
+
+    function playTone(freq, type, duration, vol = 0.2, delay = 0) {
+      if (!audioEnabled) return;
+      try {
+        initAudio();
+        if (!audioCtx) return;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime + delay);
+        gain.gain.setValueAtTime(vol, audioCtx.currentTime + delay);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + delay + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(audioCtx.currentTime + delay);
+        osc.stop(audioCtx.currentTime + delay + duration);
+      } catch (e) {}
+    }
+
+    function sfxTap() {
+      playTone(540, 'sine', 0.055, 0.1, 0);
+    }
+
+    function sfxKey() {
+      playTone(640, 'triangle', 0.065, 0.12, 0);
+    }
+
+    function sfxCorrect() {
+      playTone(587.33, 'triangle', 0.13, 0.22, 0);    // D5
+      playTone(739.99, 'triangle', 0.13, 0.22, 0.09); // F#5
+      playTone(880.00, 'triangle', 0.26, 0.25, 0.18); // A5
+    }
+
+    function sfxWrong() {
+      playTone(250, 'sawtooth', 0.18, 0.15, 0);
+      playTone(200, 'sawtooth', 0.26, 0.15, 0.14);
+    }
+
+    function sfxFanfare() {
+      const notes = [523.25, 659.25, 783.99, 1046.5, 783.99, 1046.5];
+      const times = [0, 0.11, 0.22, 0.34, 0.50, 0.64];
+      notes.forEach((n, idx) => playTone(n, 'triangle', 0.32, 0.25, times[idx]));
+    }
+
+    /* =========================================================================
+       2. HỆ THỐNG THÔNG BÁO TOAST (KHÔNG DÙNG ALERT)
+       ========================================================================= */
+    let toastTimer = null;
+    function showToast(msg, emoji = '⚡') {
+      const box = document.getElementById('toast-box');
+      document.getElementById('toast-msg').innerHTML = msg;
+      document.getElementById('toast-emoji').textContent = emoji;
+      box.classList.remove('hidden');
+      box.classList.add('animate-slide');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => box.classList.add('hidden'), 3200);
+    }
+
+    /* =========================================================================
+       3. HÀM HELPER TẠO KÍ HIỆU SỐ OXI HÓA CHUẨN GDPT 2018 (THẲNG TRÊN ĐẦU NGUYÊN TỐ)
+       ========================================================================= */
+    function renderOxAtom(oxValue, symbol, subText = '', isTarget = false) {
+      let badgeClass = 'ox-zero';
+      if (isTarget) {
+        badgeClass = 'ox-target';
+      } else if (oxValue === '0' || oxValue === 0) {
+        badgeClass = 'ox-zero';
+      } else if (String(oxValue).startsWith('-')) {
+        badgeClass = 'ox-neg';
+      } else {
+        badgeClass = 'ox-pos';
+      }
+
+      const subHTML = subText ? `<sub>${subText}</sub>` : '';
+      return `<span class="ox-el"><span class="ox-num ${badgeClass}">${oxValue}</span><span class="ox-sym">${symbol}${subHTML}</span></span>`;
+    }
+
+    /* =========================================================================
+       4. DỮ LIỆU & TRẠNG THÁI TRÒ CHƠI (5 CHẶNG = 100 ĐIỂM)
+       ========================================================================= */
+    const AVATAR_ROLES = [
+      { id: 'alchemist', icon: '⚗️', label: 'Nhà Giả Kim' },
+      { id: 'hunter', icon: '⚡', label: 'Thợ Săn Electron' },
+      { id: 'warrior', icon: '🛡️', label: 'Chiến Binh Phản Ứng' }
+    ];
+
+    const STAGES_INFO = [
+      { id: 1, title: 'Trạm Khởi Động Đơn Chất & Quy Tắc Vàng', maxPts: 20, gradient: 'from-cyan-600 to-blue-700', icon: '🧭' },
+      { id: 2, title: 'Đấu Trường Tinh Luyện (Bàn Phím Số Oxi Hóa)', maxPts: 20, gradient: 'from-amber-500 to-orange-600', icon: '🎛️' },
+      { id: 3, title: 'Đỉnh Cao Biến Hóa Nitrogen & Sulfur', maxPts: 20, gradient: 'from-emerald-600 to-teal-700', icon: '🏔️' },
+      { id: 4, title: 'Thử Thách Đúng/Sai Phân Tích Chuyên Sâu', maxPts: 20, gradient: 'from-purple-600 to-indigo-700', icon: '🔬' },
+      { id: 5, title: 'Mở Rương Kho Báu Số Oxi Hóa', maxPts: 20, gradient: 'from-rose-600 to-pink-700', icon: '💎' }
+    ];
+
+    let state = {
+      screen: 'welcome', // 'welcome' | 'stage' | 'summary'
+      playerName: '',
+      playerClass: '',
+      selectedRole: 'alchemist',
+      stage: 1,
+      combo: 0,
+      maxCombo: 0,
+      stageScores: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 },
+      // Dữ liệu trả lời của từng chặng
+      s1Index: 0, // 4 câu trắc nghiệm tốc độ (5đ/câu)
+      s1Answers: [null, null, null, null],
+      s1Checked: [false, false, false, false],
+
+      // Chặng 2: 5 mục tiêu nhập bằng bàn phím số oxi hóa (4đ/mục tiêu = 20đ)
+      s2Values: ['', '', '', '', ''], // KMnO4(Mn), K2Cr2O7(Cr), NH4NO3(N đầu), NH4NO3(N sau), FeS2(S)
+      s2ActiveIdx: 0,
+      s2Submitted: false,
+
+      // Chặng 3: 2 dãy sắp xếp tăng dần (10đ/dãy = 20đ)
+      s3OrderN: [], // NH3, N2, NO, NO2, HNO3
+      s3CheckedN: false,
+      s3OrderS: [], // H2S, S, SO2, H2SO4
+      s3CheckedS: false,
+
+      // Chặng 4: Đúng/Sai 4 mệnh đề (5đ/ý = 20đ)
+      s4Answers: { a: null, b: null, c: null, d: null },
+      s4Submitted: false,
+
+      // Chặng 5: Ghép cặp 4 công thức với số oxi hóa (5đ/cặp = 20đ)
+      s5Matches: {},
+      s5ActiveLeft: null,
+      s5Submitted: false
+    };
+
+    function getTotalScore() {
+      return Object.values(state.stageScores).reduce((a, b) => a + b, 0);
+    }
+
+    function recordAnswerResult(isCorrect) {
+      if (isCorrect) {
+        state.combo++;
+        if (state.combo > state.maxCombo) state.maxCombo = state.combo;
+      } else {
+        state.combo = 0;
+      }
+    }
+
+    /* =========================================================================
+       5. CẬP NHẬT THANH HUD TRÊN CÙNG
+       ========================================================================= */
+    function updateHUD() {
+      const hud = document.getElementById('game-hud');
+      if (state.screen === 'welcome') {
+        hud.classList.add('hidden');
+        return;
+      }
+      hud.classList.remove('hidden');
+
+      const roleObj = AVATAR_ROLES.find(r => r.id === state.selectedRole) || AVATAR_ROLES[0];
+      document.getElementById('hud-avatar').textContent = roleObj.icon;
+      document.getElementById('hud-player-name').textContent = state.playerName || 'Nhà Thám Hiểm';
+      document.getElementById('hud-player-role').textContent = `${roleObj.label} • Lớp ${state.playerClass}`;
+      document.getElementById('hud-score').textContent = getTotalScore();
+
+      const comboBadge = document.getElementById('hud-combo-badge');
+      if (state.combo >= 2) {
+        comboBadge.classList.remove('hidden');
+        document.getElementById('hud-combo-val').textContent = `x${state.combo}`;
+      } else {
+        comboBadge.classList.add('hidden');
+      }
+
+      if (state.screen === 'summary') {
+        document.getElementById('hud-stage-name').textContent = '🏆 Đã chinh phục Đỉnh Cao Số Oxi Hóa!';
+        document.getElementById('hud-pct-label').textContent = '100%';
+        document.getElementById('hud-progress-bar').style.width = '100%';
+      } else {
+        const info = STAGES_INFO[state.stage - 1];
+        document.getElementById('hud-stage-name').textContent = `Chặng ${state.stage}/5: ${info.title}`;
+        const pct = Math.round(((state.stage - 1) / 5) * 100 + 10);
+        document.getElementById('hud-pct-label').textContent = `${pct}%`;
+        document.getElementById('hud-progress-bar').style.width = `${pct}%`;
+      }
+
+      for (let i = 1; i <= 5; i++) {
+        const dot = document.getElementById(`step-dot-${i}`);
+        if (state.screen === 'summary' || i < state.stage) {
+          dot.className = 'h-2 rounded-full bg-emerald-400 transition-all';
+        } else if (i === state.stage) {
+          dot.className = 'h-2 rounded-full bg-amber-400 transition-all';
+        } else {
+          dot.className = 'h-1.5 rounded-full bg-slate-700 transition-all';
+        }
+      }
+    }
+
+    /* =========================================================================
+       6. MÀN HÌNH KHỞI HÀNH (NHẬP TÊN, LỚP, CHỌN NHÂN VẬT + 4 QUY TẮC VÀNG)
+       ========================================================================= */
+    function renderWelcomeScreen() {
+      const main = document.getElementById('app-main');
+      main.innerHTML = `
+        <div class="glass-card rounded-3xl p-5 sm:p-6 animate-slide space-y-5">
+          <div class="text-center">
+            <div class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/40 font-extrabold text-xs sm:text-sm mb-3">
+              <span>⚗️</span> HÓA HỌC 10 • CHƯƠNG TRÌNH GDPT 2018
+            </div>
+
+            <div class="w-20 h-20 mx-auto rounded-3xl bg-gradient-to-br from-amber-400 via-orange-500 to-pink-600 flex items-center justify-center shadow-lg shadow-orange-500/30 mb-3.5 animate-float">
+              <span class="text-4xl">🏔️</span>
+            </div>
+
+            <h1 class="font-display font-black text-2xl sm:text-3xl text-white leading-tight mb-2">
+              HÀNH TRÌNH CHINH PHỤC<br/>
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-orange-400 to-cyan-300">
+                ĐỈNH CAO SỐ OXI HÓA
+              </span>
+            </h1>
+
+            <p class="text-slate-300 text-sm sm:text-base font-medium leading-relaxed">
+              Vượt qua <strong>5 chặng khám phá</strong> với bàn phím số oxi hóa chuyên dụng để làm chủ hoàn toàn kĩ năng xác định số oxi hóa (tối đa <strong>100 điểm</strong>).
+            </p>
+          </div>
+
+          <!-- Bảng tóm tắt 4 Quy Tắc Vàng chuẩn kí hiệu số oxi hóa trên đầu nguyên tố -->
+          <div class="bg-slate-900/90 rounded-2xl p-4 border border-cyan-500/30 space-y-3">
+            <div class="flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-wider text-amber-300">
+              <span>📜</span> 4 Quy Tắc Vàng Xác Định Số Oxi Hóa
+            </div>
+
+            <div class="space-y-2.5 text-xs sm:text-sm text-slate-200 leading-relaxed">
+              <div class="p-2.5 rounded-xl bg-slate-800/80 border border-slate-700/80 flex items-center justify-between gap-2">
+                <span><strong>1. Đơn chất:</strong> Số oxi hóa luôn bằng <strong>0</strong>.</span>
+                <span class="chem-formula text-base font-bold flex-shrink-0">
+                  ${renderOxAtom('0', 'Cl', '2')} ${renderOxAtom('0', 'Fe')}
+                </span>
+              </div>
+
+              <div class="p-2.5 rounded-xl bg-slate-800/80 border border-slate-700/80 flex items-center justify-between gap-2">
+                <span><strong>2. Hợp chất:</strong> Tổng số oxi hóa các nguyên tử = <strong>0</strong>.</span>
+                <span class="chem-formula text-base font-bold flex-shrink-0">
+                  ${renderOxAtom('+1', 'H', '2')}${renderOxAtom('+6', 'S')}${renderOxAtom('-2', 'O', '4')}
+                </span>
+              </div>
+
+              <div class="p-2.5 rounded-xl bg-slate-800/80 border border-slate-700/80 flex items-center justify-between gap-2">
+                <span><strong>3. Ion:</strong> Đơn nguyên tử = điện tích ion; đa nguyên tử: tổng = điện tích ion.</span>
+                <span class="chem-formula text-base font-bold flex-shrink-0">
+                  ${renderOxAtom('+6', 'Cr', '2')}${renderOxAtom('-2', 'O', '7')}<sup>2-</sup>
+                </span>
+              </div>
+
+              <div class="p-2.5 rounded-xl bg-slate-800/80 border border-slate-700/80">
+                <div class="mb-1.5"><strong>4. Giá trị thường gặp & ngoại lệ:</strong></div>
+                <div class="flex flex-wrap items-center gap-2 text-xs">
+                  <span class="px-2 py-1 rounded-lg bg-slate-900 border border-slate-700">
+                    ${renderOxAtom('+1', 'H')} (trừ ${renderOxAtom('+2', 'Ca')}${renderOxAtom('-1', 'H', '2')})
+                  </span>
+                  <span class="px-2 py-1 rounded-lg bg-slate-900 border border-slate-700">
+                    ${renderOxAtom('-2', 'O')} (trừ ${renderOxAtom('+2', 'O')}${renderOxAtom('-1', 'F', '2')}, ${renderOxAtom('+1', 'Na', '2')}${renderOxAtom('-1', 'O', '2')})
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form thông tin học sinh -->
+          <form onsubmit="startJourney(event)" class="space-y-3.5">
+            <div>
+              <label class="block text-xs sm:text-sm font-extrabold text-slate-200 mb-1.5">
+                🎭 Chọn danh hiệu Nhà thám hiểm
+              </label>
+              <div class="grid grid-cols-3 gap-2">
+                ${AVATAR_ROLES.map(r => {
+                  const active = state.selectedRole === r.id;
+                  return `
+                    <button type="button" onclick="selectRole('${r.id}')"
+                      class="touch-btn p-2.5 rounded-xl border-2 flex flex-col items-center justify-center text-center gap-1
+                      ${active
+                        ? 'bg-amber-500/20 border-amber-400 text-amber-200 shadow'
+                        : 'bg-slate-900/70 border-slate-700 text-slate-400 hover:border-slate-500'}">
+                      <span class="text-2xl">${r.icon}</span>
+                      <span class="text-xs font-extrabold leading-tight">${r.label}</span>
+                    </button>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label for="inp-name" class="block text-xs sm:text-sm font-extrabold text-slate-200 mb-1">
+                  ✍️ Họ và tên học sinh <span class="text-rose-400">*</span>
+                </label>
+                <input id="inp-name" type="text" required placeholder="VD: Trần Minh Khôi"
+                  value="${escapeHTML(state.playerName)}"
+                  class="w-full px-3.5 py-3 rounded-xl bg-slate-900 border-2 border-slate-700 focus:border-amber-400 focus:outline-none text-white font-bold text-base" />
+              </div>
+
+              <div>
+                <label for="inp-class" class="block text-xs sm:text-sm font-extrabold text-slate-200 mb-1">
+                  🏫 Lớp <span class="text-rose-400">*</span>
+                </label>
+                <input id="inp-class" type="text" required placeholder="VD: 10A1"
+                  value="${escapeHTML(state.playerClass)}"
+                  class="w-full px-3.5 py-3 rounded-xl bg-slate-900 border-2 border-slate-700 focus:border-amber-400 focus:outline-none text-white font-bold text-base" />
+              </div>
+            </div>
+
+            <button type="submit"
+              class="touch-btn w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500 hover:from-amber-500 hover:to-rose-600 text-slate-950 font-black text-base sm:text-lg shadow-lg shadow-orange-500/30 flex items-center justify-center gap-2">
+              <span>🚀 KHỞI HÀNH CHINH PHỤC NGAY</span>
+            </button>
+          </form>
+        </div>
+      `;
+    }
+
+    function selectRole(roleId) {
+      sfxTap();
+      state.selectedRole = roleId;
+      render();
+    }
+
+    function startJourney(e) {
+      e.preventDefault();
+      const nameVal = document.getElementById('inp-name').value.trim();
+      const classVal = document.getElementById('inp-class').value.trim();
+      if (!nameVal || !classVal) {
+        showToast('Hãy nhập đầy đủ Họ tên và Lớp để ghi danh lên Thẻ Chứng Nhận nhé!', '🧭');
+        return;
+      }
+      initAudio();
+      sfxCorrect();
+      state.playerName = nameVal;
+      state.playerClass = classVal;
+      state.screen = 'stage';
+      state.stage = 1;
+      render();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* =========================================================================
+       7. RENDER TỪNG CHẶNG KHÁM PHÁ (CHẶNG 1 ĐẾN CHẶNG 5)
+       ========================================================================= */
+    function renderStageScreen() {
+      const info = STAGES_INFO[state.stage - 1];
+      let contentHTML = '';
+      if (state.stage === 1) contentHTML = renderStage1();
+      if (state.stage === 2) contentHTML = renderStage2();
+      if (state.stage === 3) contentHTML = renderStage3();
+      if (state.stage === 4) contentHTML = renderStage4();
+      if (state.stage === 5) contentHTML = renderStage5();
+
+      const stageDone = isCurrentStageComplete();
+      const main = document.getElementById('app-main');
+      main.innerHTML = `
+        <div class="space-y-4 animate-slide">
+          <!-- Thẻ nội dung chặng -->
+          <div class="light-panel rounded-3xl overflow-hidden">
+            <div class="bg-gradient-to-r ${info.gradient} p-4 sm:p-5 text-white">
+              <div class="flex items-center justify-between gap-2 mb-1.5">
+                <span class="px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-xs font-extrabold">
+                  ${info.icon} CHẶNG ${info.id}/5
+                </span>
+                <span class="px-3 py-1 rounded-full bg-black/25 text-xs font-extrabold">
+                  Điểm chặng: ${state.stageScores[info.id]}/${info.maxPts}đ
+                </span>
+              </div>
+              <h2 class="font-display font-black text-xl sm:text-2xl leading-snug">
+                ${info.title}
+              </h2>
+            </div>
+
+            <div class="p-4 sm:p-5">
+              ${contentHTML}
+            </div>
+          </div>
+
+          <!-- Nút chuyển chặng -->
+          <div class="pb-4">
+            ${stageDone ? `
+              <button type="button" onclick="advanceStage()"
+                class="touch-btn w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-black text-base sm:text-lg shadow-lg shadow-emerald-500/30 flex items-center justify-center gap-2 animate-slide">
+                <span>${state.stage < 5 ? `TIẾP TỤC SANG CHẶNG ${state.stage + 1} ➡️` : '🏆 HOÀN THÀNH & NHẬN CHỨNG NHẬN'}</span>
+              </button>
+            ` : `
+              <div class="p-3.5 rounded-2xl bg-slate-900/85 border border-slate-700 text-center text-xs sm:text-sm font-bold text-slate-300">
+                💡 Hoàn thành tất cả thử thách ở chặng này để mở đường leo tiếp lên đỉnh núi nhé!
+              </div>
+            `}
+          </div>
+        </div>
+      `;
+    }
+
+    function isCurrentStageComplete() {
+      if (state.stage === 1) return state.s1Checked.every(Boolean);
+      if (state.stage === 2) return state.s2Submitted;
+      if (state.stage === 3) return state.s3CheckedN && state.s3CheckedS;
+      if (state.stage === 4) return state.s4Submitted;
+      if (state.stage === 5) return state.s5Submitted;
+      return false;
+    }
+
+    function advanceStage() {
+      sfxTap();
+      if (state.stage < 5) {
+        state.stage++;
+        render();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        state.screen = 'summary';
+        sfxFanfare();
+        render();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        launchConfetti();
+      }
+    }
+
+    /* -------------------------------------------------------------------------
+       CHẶNG 1: TRẮC NGHIỆM TỐC ĐỘ - ĐƠN CHẤT & QUY TẮC CƠ BẢN (4 CÂU x 5Đ = 20Đ)
+       ------------------------------------------------------------------------- */
+    const S1_QUESTIONS = [
+      {
+        prompt: 'Trong đơn chất khí chlorine (<strong>Cl<sub>2</sub></strong>), số oxi hóa của nguyên tử Cl là bao nhiêu?',
+        options: ['0', '-1', '+1', '+2'],
+        correct: '0',
+        annotatedFormula: `<span class="chem-formula text-2xl font-black">${renderOxAtom('0', 'Cl', '2')}</span>`,
+        explain: 'Theo Quy tắc 1: Trong mọi đơn chất, số oxi hóa của nguyên tử luôn bằng <strong>0</strong> (viết đúng là 0, không viết +0 hay -0).'
+      },
+      {
+        prompt: 'Trong hợp chất <strong>OF<sub>2</sub></strong> (oxygen difluoride), số oxi hóa của nguyên tố <strong>O</strong> là bao nhiêu?',
+        options: ['+2', '-2', '+1', '-1'],
+        correct: '+2',
+        annotatedFormula: `<span class="chem-formula text-2xl font-black">${renderOxAtom('+2', 'O')}${renderOxAtom('-1', 'F', '2')}</span>`,
+        explain: 'Đây là ngoại lệ nổi tiếng của oxygen! Vì F có độ âm điện lớn nhất (3,98) nên F luôn có số oxi hóa <strong>-1</strong> → x + 2·(-1) = 0 ⇒ x = <strong>+2</strong>.'
+      },
+      {
+        prompt: 'Trong hợp chất peroxide <strong>Na<sub>2</sub>O<sub>2</sub></strong> (sodium peroxide), số oxi hóa của nguyên tố <strong>O</strong> là bao nhiêu?',
+        options: ['-1', '-2', '+1', '0'],
+        correct: '-1',
+        annotatedFormula: `<span class="chem-formula text-2xl font-black">${renderOxAtom('+1', 'Na', '2')}${renderOxAtom('-1', 'O', '2')}</span>`,
+        explain: 'Kim loại kiềm Na luôn có số oxi hóa <strong>+1</strong>. Áp dụng quy tắc tổng = 0: 2·(+1) + 2·x = 0 ⇒ x = <strong>-1</strong>.'
+      },
+      {
+        prompt: 'Trong hydride kim loại <strong>CaH<sub>2</sub></strong> (calcium hydride), số oxi hóa của nguyên tố <strong>H</strong> là bao nhiêu?',
+        options: ['-1', '+1', '0', '-2'],
+        correct: '-1',
+        annotatedFormula: `<span class="chem-formula text-2xl font-black">${renderOxAtom('+2', 'Ca')}${renderOxAtom('-1', 'H', '2')}</span>`,
+        explain: 'Kim loại kiềm thổ Ca luôn có số oxi hóa <strong>+2</strong>. Trong hydride kim loại, H nhận electron nên mang số oxi hóa <strong>-1</strong>: (+2) + 2·(-1) = 0.'
+      }
+    ];
+
+    function renderStage1() {
+      return `
+        <div class="space-y-4">
+          <p class="text-sm text-slate-600 font-bold">
+            ⚡ Chạm chọn đáp án nhanh cho 4 tình huống quy tắc & trường hợp đặc biệt (5 điểm / câu):
+          </p>
+
+          ${S1_QUESTIONS.map((q, qIdx) => {
+            const userAns = state.s1Answers[qIdx];
+            const isChecked = state.s1Checked[qIdx];
+            const isRight = userAns === q.correct;
+
+            return `
+              <div class="p-4 rounded-2xl border-2 ${isChecked ? (isRight ? 'border-emerald-400 bg-emerald-50/40' : 'border-rose-400 bg-rose-50/40') : 'border-slate-200 bg-slate-50'}">
+                <div class="flex items-center justify-between gap-2 mb-2">
+                  <span class="px-2.5 py-0.5 rounded-lg bg-cyan-100 text-cyan-900 font-extrabold text-xs">Câu 1.${qIdx + 1} • 5 điểm</span>
+                  ${isChecked ? (isRight
+                    ? '<span class="text-emerald-700 font-black text-xs sm:text-sm">✅ +5 điểm</span>'
+                    : '<span class="text-rose-600 font-black text-xs sm:text-sm">❌ 0 điểm</span>') : ''}
+                </div>
+
+                <p class="font-extrabold text-slate-800 text-sm sm:text-base leading-relaxed mb-3">
+                  ${q.prompt}
+                </p>
+
+                <div class="grid grid-cols-2 gap-2">
+                  ${q.options.map(opt => {
+                    const picked = userAns === opt;
+                    let btnCls = 'bg-white border-slate-200 text-slate-800 hover:bg-cyan-50';
+                    if (isChecked) {
+                      if (opt === q.correct) btnCls = 'bg-emerald-600 border-emerald-600 text-white shadow';
+                      else if (picked) btnCls = 'bg-rose-600 border-rose-600 text-white';
+                      else btnCls = 'bg-white border-slate-200 text-slate-400 opacity-65';
+                    } else if (picked) {
+                      btnCls = 'bg-cyan-600 border-cyan-600 text-white shadow';
+                    }
+
+                    return `
+                      <button type="button" onclick="answerStage1(${qIdx}, '${opt}')" ${isChecked ? 'disabled' : ''}
+                        class="touch-btn py-2.5 px-3 rounded-xl border-2 font-display font-black text-base sm:text-lg ${btnCls}">
+                        ${opt}
+                      </button>
+                    `;
+                  }).join('')}
+                </div>
+
+                ${isChecked ? `
+                  <div class="mt-3 p-3 rounded-xl bg-slate-900 text-white space-y-2">
+                    <div class="flex items-center justify-between gap-2 border-b border-slate-700 pb-2">
+                      <span class="text-xs font-extrabold text-amber-300">✨ Kí hiệu chuẩn trên đầu nguyên tố:</span>
+                      <div class="bg-slate-800 px-3 py-1 rounded-xl border border-slate-600">${q.annotatedFormula}</div>
+                    </div>
+                    <div class="text-xs text-slate-200 leading-relaxed">${q.explain}</div>
+                  </div>
+                ` : ''}
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    function answerStage1(qIdx, optVal) {
+      if (state.s1Checked[qIdx]) return;
+      state.s1Answers[qIdx] = optVal;
+      state.s1Checked[qIdx] = true;
+      const isRight = optVal === S1_QUESTIONS[qIdx].correct;
+      recordAnswerResult(isRight);
+      if (isRight) {
+        state.stageScores[1] += 5;
+        sfxCorrect();
+      } else {
+        sfxWrong();
+      }
+      render();
+    }
+
+    /* -------------------------------------------------------------------------
+       CHẶNG 2: BÀN PHÍM SỐ OXI HÓA CHUYÊN DỤNG (5 MỤC TIÊU x 4Đ = 20Đ)
+       ------------------------------------------------------------------------- */
+    const S2_TARGETS = [
+      {
+        id: 0,
+        label: 'Tìm số oxi hóa của Mn trong KMnO<sub>4</sub>',
+        correct: '+7',
+        buildPreview: (val, checked) => `
+          <span class="chem-formula text-2xl sm:text-3xl font-black text-white">
+            ${renderOxAtom('+1', 'K')}${renderOxAtom(val || '?', 'Mn', '', !checked)}${renderOxAtom('-2', 'O', '4')}
+          </span>
+        `,
+        explain: 'KMnO<sub>4</sub>: (+1) + x + 4·(-2) = 0 ⇒ x = <strong>+7</strong>.'
+      },
+      {
+        id: 1,
+        label: 'Tìm số oxi hóa của Cr trong K<sub>2</sub>Cr<sub>2</sub>O<sub>7</sub>',
+        correct: '+6',
+        buildPreview: (val, checked) => `
+          <span class="chem-formula text-2xl sm:text-3xl font-black text-white">
+            ${renderOxAtom('+1', 'K', '2')}${renderOxAtom(val || '?', 'Cr', '2', !checked)}${renderOxAtom('-2', 'O', '7')}
+          </span>
+        `,
+        explain: 'K<sub>2</sub>Cr<sub>2</sub>O<sub>7</sub>: 2·(+1) + 2·x + 7·(-2) = 0 ⇒ 2x = +12 ⇒ x = <strong>+6</strong>.'
+      },
+      {
+        id: 2,
+        label: 'Tìm số oxi hóa của N trong ion NH<sub>4</sub><sup>+</sup> của NH<sub>4</sub>NO<sub>3</sub>',
+        correct: '-3',
+        buildPreview: (val, checked) => `
+          <span class="chem-formula text-2xl sm:text-3xl font-black text-white">
+            [${renderOxAtom(val || '?', 'N', '', !checked)}${renderOxAtom('+1', 'H', '4')}]<sup>+</sup>
+          </span>
+        `,
+        explain: 'Trong ion NH<sub>4</sub><sup>+</sup>: x + 4·(+1) = +1 ⇒ x = <strong>-3</strong>.'
+      },
+      {
+        id: 3,
+        label: 'Tìm số oxi hóa của N trong ion NO<sub>3</sub><sup>-</sup> của NH<sub>4</sub>NO<sub>3</sub>',
+        correct: '+5',
+        buildPreview: (val, checked) => `
+          <span class="chem-formula text-2xl sm:text-3xl font-black text-white">
+            [${renderOxAtom(val || '?', 'N', '', !checked)}${renderOxAtom('-2', 'O', '3')}]<sup>-</sup>
+          </span>
+        `,
+        explain: 'Trong ion NO<sub>3</sub><sup>-</sup>: y + 3·(-2) = -1 ⇒ y = <strong>+5</strong>. (NH<sub>4</sub>NO<sub>3</sub> có 2 nguyên tử N mang hai số oxi hóa khác nhau là -3 và +5!)'
+      },
+      {
+        id: 4,
+        label: 'Tìm số oxi hóa của S trong quặng pyrite FeS<sub>2</sub> (biết Fe có số oxi hóa +2)',
+        correct: '-1',
+        buildPreview: (val, checked) => `
+          <span class="chem-formula text-2xl sm:text-3xl font-black text-white">
+            ${renderOxAtom('+2', 'Fe')}${renderOxAtom(val || '?', 'S', '2', !checked)}
+          </span>
+        `,
+        explain: 'Trong quặng sắt pyrite FeS<sub>2</sub> (chứa cầu disulfide S<sub>2</sub><sup>2-</sup>): (+2) + 2·x = 0 ⇒ x = <strong>-1</strong>.'
+      }
+    ];
+
+    function renderStage2() {
+      const activeIdx = state.s2ActiveIdx;
+      const curTarget = S2_TARGETS[activeIdx];
+      const curVal = state.s2Values[activeIdx];
+
+      return `
+        <div class="space-y-4">
+          <p class="text-sm text-slate-600 font-bold leading-relaxed">
+            🎛️ Chạm chọn từng thẻ công thức bên dưới, sau đó bấm <strong>Dấu (+ / - / 0)</strong> và <strong>Số (1 → 7)</strong> trên bàn phím ảo để gắn trực tiếp lên đầu nguyên tố (4 điểm / công thức):
+          </p>
+
+          <!-- Danh sách 5 thẻ công thức -->
+          <div class="grid grid-cols-1 gap-2">
+            ${S2_TARGETS.map((t, idx) => {
+              const val = state.s2Values[idx];
+              const isFocus = !state.s2Submitted && activeIdx === idx;
+              const isRight = val === t.correct;
+
+              let rowCls = 'bg-slate-900 border-slate-700 text-white';
+              if (state.s2Submitted) {
+                rowCls = isRight ? 'bg-emerald-950 border-emerald-500 text-white' : 'bg-rose-950 border-rose-500 text-white';
+              } else if (isFocus) {
+                rowCls = 'bg-slate-900 border-amber-400 ring-2 ring-amber-400/50 text-white';
+              }
+
+              return `
+                <button type="button" onclick="focusS2Target(${idx})" ${state.s2Submitted ? 'disabled' : ''}
+                  class="touch-btn w-full p-3 rounded-2xl border-2 flex items-center justify-between gap-3 text-left ${rowCls}">
+                  <div class="min-w-0">
+                    <div class="text-[11px] font-extrabold uppercase tracking-wider ${isFocus ? 'text-amber-300' : 'text-slate-400'}">
+                      Mục tiêu #${idx + 1} ${isFocus ? '• Đang chỉnh sửa' : ''}
+                    </div>
+                    <div class="text-xs sm:text-sm font-bold text-slate-200 leading-snug mt-0.5">${t.label}</div>
+                  </div>
+                  <div class="flex-shrink-0 bg-slate-800/90 px-3 py-1.5 rounded-xl border border-slate-600">
+                    ${t.buildPreview(state.s2Submitted ? (isRight ? val : `${val || '∅'}→${t.correct}`) : val, state.s2Submitted)}
+                  </div>
+                </button>
+              `;
+            }).join('')}
+          </div>
+
+          <!-- BÀN PHÍM SỐ OXI HÓA CHUYÊN DỤNG (KHÔNG CHE MÀN HÌNH ĐIỆN THOẠI) -->
+          ${!state.s2Submitted ? `
+            <div class="p-4 rounded-2xl bg-slate-900 border-2 border-amber-400/70 text-white space-y-3 shadow-xl">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-xs font-extrabold text-amber-300">
+                  ⌨️ Bàn phím số oxi hóa (Mục tiêu #${activeIdx + 1}):
+                </span>
+                <span class="px-2.5 py-0.5 rounded-lg bg-slate-800 text-cyan-300 font-display font-black text-sm border border-slate-600">
+                  Giá trị: ${curVal || 'Chưa nhập'}
+                </span>
+              </div>
+
+              <!-- Hàng 1: Dấu trước & Số 0 -->
+              <div class="grid grid-cols-4 gap-2">
+                <button type="button" onclick="pressOxSign('+')"
+                  class="touch-btn rounded-xl bg-gradient-to-b from-amber-500 to-orange-600 text-white font-display font-black text-xl shadow">
+                  +
+                </button>
+                <button type="button" onclick="pressOxSign('-')"
+                  class="touch-btn rounded-xl bg-gradient-to-b from-cyan-500 to-blue-600 text-white font-display font-black text-xl shadow">
+                  -
+                </button>
+                <button type="button" onclick="pressOxZero()"
+                  class="touch-btn rounded-xl bg-slate-200 text-slate-900 font-display font-black text-lg shadow">
+                  0
+                </button>
+                <button type="button" onclick="clearOxInput()"
+                  class="touch-btn rounded-xl bg-rose-600/90 hover:bg-rose-600 text-white font-extrabold text-xs sm:text-sm shadow">
+                  ⌫ Xóa
+                </button>
+              </div>
+
+              <!-- Hàng 2: Các chữ số 1 đến 7 -->
+              <div class="grid grid-cols-7 gap-1.5">
+                ${[1, 2, 3, 4, 5, 6, 7].map(num => `
+                  <button type="button" onclick="pressOxDigit('${num}')"
+                    class="touch-btn rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-600 text-white font-display font-black text-base sm:text-lg">
+                    ${num}
+                  </button>
+                `).join('')}
+              </div>
+
+              <div class="text-[11px] text-slate-400 text-center font-semibold">
+                Quy tắc chuẩn: Bấm <strong>Dấu (+ hoặc -)</strong> trước, bấm <strong>Số</strong> sau (riêng số 0 không mang dấu).
+              </div>
+            </div>
+
+            <button type="button" onclick="submitStage2()"
+              class="touch-btn w-full py-3.5 px-5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white font-extrabold text-sm sm:text-base shadow">
+              ✔️ Chốt Toàn Bộ 5 Công Thức (20 điểm)
+            </button>
+          ` : `
+            <div class="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-xs sm:text-sm text-slate-800 space-y-2">
+              <div class="font-extrabold text-amber-900">🔬 Giải Mã Chi Tiết Từng Công Thức:</div>
+              ${S2_TARGETS.map((t, i) => `
+                <div class="leading-relaxed">
+                  <strong>#${i + 1}:</strong> ${t.explain}
+                </div>
+              `).join('')}
+            </div>
+          `}
+        </div>
+      `;
+    }
+
+    function focusS2Target(idx) {
+      if (state.s2Submitted) return;
+      sfxTap();
+      state.s2ActiveIdx = idx;
+      render();
+    }
+
+    function pressOxSign(sign) {
+      if (state.s2Submitted) return;
+      sfxKey();
+      const idx = state.s2ActiveIdx;
+      const cur = state.s2Values[idx];
+      if (cur && cur !== '0' && (cur.startsWith('+') || cur.startsWith('-'))) {
+        state.s2Values[idx] = sign + cur.slice(1);
+      } else if (cur && cur !== '0') {
+        state.s2Values[idx] = sign + cur;
+      } else {
+        state.s2Values[idx] = sign;
+      }
+      render();
+    }
+
+    function pressOxZero() {
+      if (state.s2Submitted) return;
+      sfxKey();
+      state.s2Values[state.s2ActiveIdx] = '0';
+      // Tự chuyển sang ô trống tiếp theo
+      const nextEmpty = state.s2Values.findIndex(v => !v);
+      if (nextEmpty !== -1) state.s2ActiveIdx = nextEmpty;
+      render();
+    }
+
+    function pressOxDigit(digit) {
+      if (state.s2Submitted) return;
+      sfxKey();
+      const idx = state.s2ActiveIdx;
+      const cur = state.s2Values[idx];
+      if (cur === '+' || cur === '-') {
+        state.s2Values[idx] = cur + digit;
+        // Đã nhập đủ dấu + số -> tự động nhảy sang công thức chưa nhập kế tiếp
+        const nextEmpty = state.s2Values.findIndex(v => !v || v === '+' || v === '-');
+        if (nextEmpty !== -1) state.s2ActiveIdx = nextEmpty;
+      } else if (cur.startsWith('+') || cur.startsWith('-')) {
+        state.s2Values[idx] = cur[0] + digit;
+      } else {
+        showToast('Hãy bấm chọn Dấu (<strong>+</strong> hoặc <strong>-</strong>) trước khi bấm số nhé!', '☝️');
+        state.s2Values[idx] = '+' + digit;
+      }
+      render();
+    }
+
+    function clearOxInput() {
+      if (state.s2Submitted) return;
+      sfxKey();
+      state.s2Values[state.s2ActiveIdx] = '';
+      render();
+    }
+
+    function submitStage2() {
+      const incomplete = state.s2Values.some(v => !v || v === '+' || v === '-');
+      if (incomplete) {
+        showToast('Bạn hãy nhập đủ số oxi hóa (gồm cả dấu và số) cho cả 5 mục tiêu nhé!', '🎛️');
+        return;
+      }
+      state.s2Submitted = true;
+      let correctCount = 0;
+      S2_TARGETS.forEach((t, i) => {
+        if (state.s2Values[i] === t.correct) correctCount++;
+      });
+      state.stageScores[2] = correctCount * 4;
+      recordAnswerResult(correctCount >= 4);
+      if (correctCount >= 4) sfxCorrect(); else sfxWrong();
+      render();
+    }
+
+    /* -------------------------------------------------------------------------
+       CHẶNG 3: CHẠM XẾP THANG SỐ OXI HÓA NITROGEN & SULFUR (2 DÃY x 10Đ = 20Đ)
+       ------------------------------------------------------------------------- */
+    const S3_N_ITEMS = [
+      { id: 'NH3', raw: 'NH<sub>3</sub>', ox: '-3', annotated: `${renderOxAtom('-3', 'N')}${renderOxAtom('+1', 'H', '3')}` },
+      { id: 'N2', raw: 'N<sub>2</sub>', ox: '0', annotated: `${renderOxAtom('0', 'N', '2')}` },
+      { id: 'NO', raw: 'NO', ox: '+2', annotated: `${renderOxAtom('+2', 'N')}${renderOxAtom('-2', 'O')}` },
+      { id: 'NO2', raw: 'NO<sub>2</sub>', ox: '+4', annotated: `${renderOxAtom('+4', 'N')}${renderOxAtom('-2', 'O', '2')}` },
+      { id: 'HNO3', raw: 'HNO<sub>3</sub>', ox: '+5', annotated: `${renderOxAtom('+1', 'H')}${renderOxAtom('+5', 'N')}${renderOxAtom('-2', 'O', '3')}` }
+    ];
+    const S3_N_CORRECT = ['NH3', 'N2', 'NO', 'NO2', 'HNO3'];
+
+    const S3_S_ITEMS = [
+      { id: 'H2S', raw: 'H<sub>2</sub>S', ox: '-2', annotated: `${renderOxAtom('+1', 'H', '2')}${renderOxAtom('-2', 'S')}` },
+      { id: 'S', raw: 'S', ox: '0', annotated: `${renderOxAtom('0', 'S')}` },
+      { id: 'SO2', raw: 'SO<sub>2</sub>', ox: '+4', annotated: `${renderOxAtom('+4', 'S')}${renderOxAtom('-2', 'O', '2')}` },
+      { id: 'H2SO4', raw: 'H<sub>2</sub>SO<sub>4</sub>', ox: '+6', annotated: `${renderOxAtom('+1', 'H', '2')}${renderOxAtom('+6', 'S')}${renderOxAtom('-2', 'O', '4')}` }
+    ];
+    const S3_S_CORRECT = ['H2S', 'S', 'SO2', 'H2SO4'];
+
+    function renderStage3() {
+      // Hiển thị xáo trộn thứ tự ban đầu để học sinh suy luận
+      const displayN = [S3_N_ITEMS[2], S3_N_ITEMS[4], S3_N_ITEMS[0], S3_N_ITEMS[3], S3_N_ITEMS[1]];
+      const displayS = [S3_S_ITEMS[2], S3_S_ITEMS[0], S3_S_ITEMS[3], S3_S_ITEMS[1]];
+
+      const isNRight = state.s3OrderN.length === 5 && state.s3OrderN.every((v, i) => v === S3_N_CORRECT[i]);
+      const isSRight = state.s3OrderS.length === 4 && state.s3OrderS.every((v, i) => v === S3_S_CORRECT[i]);
+
+      return `
+        <div class="space-y-5">
+          <!-- DÃY 1: NITROGEN -->
+          <div class="p-4 rounded-2xl border-2 ${state.s3CheckedN ? (isNRight ? 'border-emerald-400 bg-emerald-50/40' : 'border-rose-400 bg-rose-50/40') : 'border-slate-200 bg-slate-50'}">
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 font-extrabold text-xs">Thang 3.1 • 10 điểm</span>
+              ${state.s3CheckedN ? (isNRight
+                ? '<span class="text-emerald-700 font-black text-sm">✅ +10 điểm</span>'
+                : '<span class="text-rose-600 font-black text-sm">❌ 0 điểm</span>') : ''}
+            </div>
+
+            <p class="font-extrabold text-slate-800 text-sm sm:text-base leading-relaxed mb-3">
+              Chạm lần lượt để xếp các chất sau theo chiều <strong>TĂNG DẦN số oxi hóa của nguyên tố Nitrogen (N)</strong>:
+            </p>
+
+            <div class="flex flex-wrap gap-2 mb-3">
+              ${displayN.map(item => {
+                const pos = state.s3OrderN.indexOf(item.id);
+                const picked = pos !== -1;
+                return `
+                  <button type="button" onclick="toggleS3List('N', '${item.id}')" ${state.s3CheckedN ? 'disabled' : ''}
+                    class="touch-btn px-3.5 py-2.5 rounded-xl border-2 font-black text-base flex items-center gap-2
+                    ${picked ? 'bg-emerald-600 border-emerald-600 text-white shadow' : 'bg-white border-slate-300 text-slate-800 hover:bg-emerald-50'}">
+                    <span>${item.raw}</span>
+                    ${picked ? `<span class="px-1.5 py-0.5 rounded bg-white text-emerald-800 text-xs font-black">#${pos + 1}</span>` : ''}
+                  </button>
+                `;
+              }).join('')}
+            </div>
+
+            <div class="p-2.5 rounded-xl bg-white border border-slate-200 text-xs sm:text-sm font-extrabold text-slate-700">
+              Thứ tự của bạn: <span class="text-emerald-700">${state.s3OrderN.length ? state.s3OrderN.map(id => S3_N_ITEMS.find(x => x.id === id).raw).join('  <  ') : 'Chưa chọn'}</span>
+            </div>
+
+            ${!state.s3CheckedN ? `
+              <button type="button" onclick="submitS3List('N')"
+                class="touch-btn w-full mt-3 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-sm shadow">
+                ✔️ Chốt Thang Nitrogen
+              </button>
+            ` : `
+              <div class="mt-3 p-3.5 rounded-2xl bg-slate-900 text-white space-y-2">
+                <div class="text-xs font-extrabold text-amber-300">🪜 Bậc thang số oxi hóa chuẩn của Nitrogen:</div>
+                <div class="flex flex-wrap items-center justify-around gap-2 bg-slate-800 p-2.5 rounded-xl border border-slate-700">
+                  ${S3_N_ITEMS.map(x => `<span class="chem-formula text-lg font-black">${x.annotated}</span>`).join('<span class="text-amber-400 font-black">&lt;</span>')}
+                </div>
+              </div>
+            `}
+          </div>
+
+          <!-- DÃY 2: SULFUR -->
+          <div class="p-4 rounded-2xl border-2 ${state.s3CheckedS ? (isSRight ? 'border-emerald-400 bg-emerald-50/40' : 'border-rose-400 bg-rose-50/40') : 'border-slate-200 bg-slate-50'}">
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="px-2.5 py-1 rounded-lg bg-teal-100 text-teal-900 font-extrabold text-xs">Thang 3.2 • 10 điểm</span>
+              ${state.s3CheckedS ? (isSRight
+                ? '<span class="text-emerald-700 font-black text-sm">✅ +10 điểm</span>'
+                : '<span class="text-rose-600 font-black text-sm">❌ 0 điểm</span>') : ''}
+            </div>
+
+            <p class="font-extrabold text-slate-800 text-sm sm:text-base leading-relaxed mb-3">
+              Chạm lần lượt để xếp các chất sau theo chiều <strong>TĂNG DẦN số oxi hóa của nguyên tố Sulfur (S)</strong>:
+            </p>
+
+            <div class="flex flex-wrap gap-2 mb-3">
+              ${displayS.map(item => {
+                const pos = state.s3OrderS.indexOf(item.id);
+                const picked = pos !== -1;
+                return `
+                  <button type="button" onclick="toggleS3List('S', '${item.id}')" ${state.s3CheckedS ? 'disabled' : ''}
+                    class="touch-btn px-3.5 py-2.5 rounded-xl border-2 font-black text-base flex items-center gap-2
+                    ${picked ? 'bg-teal-600 border-teal-600 text-white shadow' : 'bg-white border-slate-300 text-slate-800 hover:bg-teal-50'}">
+                    <span>${item.raw}</span>
+                    ${picked ? `<span class="px-1.5 py-0.5 rounded bg-white text-teal-800 text-xs font-black">#${pos + 1}</span>` : ''}
+                  </button>
+                `;
+              }).join('')}
+            </div>
+
+            <div class="p-2.5 rounded-xl bg-white border border-slate-200 text-xs sm:text-sm font-extrabold text-slate-700">
+              Thứ tự của bạn: <span class="text-teal-700">${state.s3OrderS.length ? state.s3OrderS.map(id => S3_S_ITEMS.find(x => x.id === id).raw).join('  <  ') : 'Chưa chọn'}</span>
+            </div>
+
+            ${!state.s3CheckedS ? `
+              <button type="button" onclick="submitS3List('S')"
+                class="touch-btn w-full mt-3 py-3 px-4 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-extrabold text-sm shadow">
+                ✔️ Chốt Thang Sulfur
+              </button>
+            ` : `
+              <div class="mt-3 p-3.5 rounded-2xl bg-slate-900 text-white space-y-2">
+                <div class="text-xs font-extrabold text-amber-300">🪜 Bậc thang số oxi hóa chuẩn của Sulfur:</div>
+                <div class="flex flex-wrap items-center justify-around gap-2 bg-slate-800 p-2.5 rounded-xl border border-slate-700">
+                  ${S3_S_ITEMS.map(x => `<span class="chem-formula text-lg font-black">${x.annotated}</span>`).join('<span class="text-amber-400 font-black">&lt;</span>')}
+                </div>
+              </div>
+            `}
+          </div>
+        </div>
+      `;
+    }
+
+    function toggleS3List(kind, id) {
+      sfxTap();
+      const arr = kind === 'N' ? state.s3OrderN : state.s3OrderS;
+      const idx = arr.indexOf(id);
+      if (idx !== -1) arr.splice(idx, 1);
+      else arr.push(id);
+      render();
+    }
+
+    function submitS3List(kind) {
+      if (kind === 'N') {
+        if (state.s3OrderN.length < 5) {
+          showToast('Hãy chọn đủ cả 5 chất chứa Nitrogen theo thứ tự tăng dần nhé!', '🏔️');
+          return;
+        }
+        state.s3CheckedN = true;
+        const ok = state.s3OrderN.every((v, i) => v === S3_N_CORRECT[i]);
+        recordAnswerResult(ok);
+        if (ok) { state.stageScores[3] += 10; sfxCorrect(); } else { sfxWrong(); }
+      } else {
+        if (state.s3OrderS.length < 4) {
+          showToast('Hãy chọn đủ cả 4 chất chứa Sulfur theo thứ tự tăng dần nhé!', '🏔️');
+          return;
+        }
+        state.s3CheckedS = true;
+        const ok = state.s3OrderS.every((v, i) => v === S3_S_CORRECT[i]);
+        recordAnswerResult(ok);
+        if (ok) { state.stageScores[3] += 10; sfxCorrect(); } else { sfxWrong(); }
+      }
+      render();
+    }
+
+    /* -------------------------------------------------------------------------
+       CHẶNG 4: THỬ THÁCH ĐÚNG / SAI 4 MỆNH ĐỀ CHUYÊN SÂU (4 Ý x 5Đ = 20Đ)
+       ------------------------------------------------------------------------- */
+    function renderStage4() {
+      const statements = [
+        {
+          k: 'a',
+          text: 'Trong oxide sắt từ <strong>Fe<sub>3</sub>O<sub>4</sub></strong>, số oxi hóa trung bình của nguyên tố Fe là <strong>+8/3</strong> (do Fe<sub>3</sub>O<sub>4</sub> gồm FeO và Fe<sub>2</sub>O<sub>3</sub>).',
+          ans: true,
+          formula: `${renderOxAtom('+8/3', 'Fe', '3')}${renderOxAtom('-2', 'O', '4')}`,
+          explain: 'ĐÚNG! Áp dụng quy tắc tổng = 0: 3·x + 4·(-2) = 0 ⇒ x = <strong>+8/3</strong>.'
+        },
+        {
+          k: 'b',
+          text: 'Trong phân tử ethanol (<strong>C<sub>2</sub>H<sub>5</sub>OH</strong>), số oxi hóa trung bình của nguyên tử carbon là <strong>+2</strong>.',
+          ans: false,
+          formula: `${renderOxAtom('-2', 'C', '2')}${renderOxAtom('+1', 'H', '6')}${renderOxAtom('-2', 'O')}`,
+          explain: 'SAI! Viết gọn là C<sub>2</sub>H<sub>6</sub>O: 2·x + 6·(+1) + (-2) = 0 ⇒ 2x = -4 ⇒ x = <strong>-2</strong>.'
+        },
+        {
+          k: 'c',
+          text: 'Trong sulfuric acid (<strong>H<sub>2</sub>SO<sub>4</sub></strong>), nguyên tố S đạt mức oxi hóa cao nhất có thể của lưu huỳnh là <strong>+6</strong>.',
+          ans: true,
+          formula: `${renderOxAtom('+1', 'H', '2')}${renderOxAtom('+6', 'S')}${renderOxAtom('-2', 'O', '4')}`,
+          explain: 'ĐÚNG! Sulfur ở nhóm VIA (có 6 electron hóa trị) nên số oxi hóa cao nhất là <strong>+6</strong>.'
+        },
+        {
+          k: 'd',
+          text: 'Khi sục khí <strong>Cl<sub>2</sub></strong> vào dung dịch NaOH ở nhiệt độ thường tạo nước Javel (NaCl + NaClO + H<sub>2</sub>O), nguyên tử Cl chỉ đóng vai trò chất khử vì số oxi hóa chỉ tăng từ 0 lên +1.',
+          ans: false,
+          formula: `${renderOxAtom('0', 'Cl', '2')} → ${renderOxAtom('+1', 'Na')}${renderOxAtom('-1', 'Cl')} + ${renderOxAtom('+1', 'Na')}${renderOxAtom('+1', 'Cl')}${renderOxAtom('-2', 'O')}`,
+          explain: 'SAI! Số oxi hóa của Cl vừa giảm từ <strong>0</strong> xuống <strong>-1</strong> (trong NaCl), vừa tăng từ <strong>0</strong> lên <strong>+1</strong> (trong NaClO) → Cl<sub>2</sub> vừa là chất oxi hóa, vừa là chất khử.'
+        }
+      ];
+
+      return `
+        <div class="space-y-4">
+          <p class="text-sm text-slate-600 font-bold">
+            🔬 Đánh giá tính <strong>Đúng</strong> hoặc <strong>Sai</strong> cho từng mệnh đề dưới đây (5 điểm / ý đúng):
+          </p>
+
+          <div class="space-y-3">
+            ${statements.map(st => {
+              const val = state.s4Answers[st.k];
+              const isRight = val === st.ans;
+              let wrapCls = 'border-slate-200 bg-slate-50';
+              if (state.s4Submitted) {
+                wrapCls = isRight ? 'border-emerald-500 bg-emerald-50/50' : 'border-rose-400 bg-rose-50/50';
+              }
+
+              return `
+                <div class="p-3.5 rounded-2xl border-2 ${wrapCls}">
+                  <div class="text-sm sm:text-[15px] font-bold text-slate-800 leading-relaxed mb-3">
+                    <span class="inline-block px-2 py-0.5 rounded bg-purple-600 text-white font-black text-xs mr-1.5">${st.k})</span>
+                    ${st.text}
+                  </div>
+
+                  <div class="grid grid-cols-2 gap-2.5">
+                    <button type="button" onclick="pickS4TF('${st.k}', true)" ${state.s4Submitted ? 'disabled' : ''}
+                      class="touch-btn py-2.5 px-3 rounded-xl font-extrabold text-sm border-2
+                      ${val === true ? 'bg-emerald-600 border-emerald-600 text-white shadow' : 'bg-white border-slate-200 text-slate-700 hover:bg-emerald-50'}">
+                      ⭕ ĐÚNG
+                    </button>
+                    <button type="button" onclick="pickS4TF('${st.k}', false)" ${state.s4Submitted ? 'disabled' : ''}
+                      class="touch-btn py-2.5 px-3 rounded-xl font-extrabold text-sm border-2
+                      ${val === false ? 'bg-rose-600 border-rose-600 text-white shadow' : 'bg-white border-slate-200 text-slate-700 hover:bg-rose-50'}">
+                      ❌ SAI
+                    </button>
+                  </div>
+
+                  ${state.s4Submitted ? `
+                    <div class="mt-3 p-3 rounded-xl bg-slate-900 text-white space-y-1.5">
+                      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-700 pb-1.5">
+                        <span class="text-xs font-extrabold ${isRight ? 'text-emerald-400' : 'text-amber-300'}">
+                          ${isRight ? '✅ Chuẩn xác (+5đ)' : '💡 Giải mã chuẩn'}
+                        </span>
+                        <span class="chem-formula text-base font-black bg-slate-800 px-2.5 py-1 rounded-lg">${st.formula}</span>
+                      </div>
+                      <div class="text-xs text-slate-200 leading-relaxed">${st.explain}</div>
+                    </div>
+                  ` : ''}
+                </div>
+              `;
+            }).join('')}
+          </div>
+
+          ${!state.s4Submitted ? `
+            <button type="button" onclick="submitStage4()"
+              class="touch-btn w-full py-3.5 px-5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-extrabold text-sm sm:text-base shadow">
+              ✔️ Chốt 4 Mệnh Đề Đúng/Sai
+            </button>
+          ` : ''}
+        </div>
+      `;
+    }
+
+    function pickS4TF(k, val) {
+      if (state.s4Submitted) return;
+      sfxTap();
+      state.s4Answers[k] = val;
+      render();
+    }
+
+    function submitStage4() {
+      const a = state.s4Answers;
+      if (a.a === null || a.b === null || a.c === null || a.d === null) {
+        showToast('Bạn hãy chọn Đúng hoặc Sai cho đầy đủ cả 4 ý a, b, c, d nhé!', '🔬');
+        return;
+      }
+      state.s4Submitted = true;
+      const keyMap = { a: true, b: false, c: true, d: false };
+      let pts = 0;
+      Object.keys(keyMap).forEach(k => {
+        if (a[k] === keyMap[k]) pts += 5;
+      });
+      state.stageScores[4] = pts;
+      recordAnswerResult(pts >= 15);
+      if (pts >= 15) sfxCorrect(); else sfxWrong();
+      render();
+    }
+
+    /* -------------------------------------------------------------------------
+       CHẶNG 5: GHÉP CẶP THẦN TỐC / MỞ RƯƠNG KHO BÁU (4 CẶP x 5Đ = 20Đ)
+       ------------------------------------------------------------------------- */
+    const S5_LEFT = [
+      { id: 'L1', formula: 'Ca<sub>3</sub>(<span class="text-rose-600 underline decoration-2">P</span>O<sub>4</sub>)<sub>2</sub>', targetEl: 'P', solved: `${renderOxAtom('+2', 'Ca', '3')}(${renderOxAtom('+5', 'P')}${renderOxAtom('-2', 'O', '4')})<sub>2</sub>` },
+      { id: 'L2', formula: 'K<span class="text-rose-600 underline decoration-2">Cl</span>O<sub>3</sub>', targetEl: 'Cl', solved: `${renderOxAtom('+1', 'K')}${renderOxAtom('+5', 'Cl')}${renderOxAtom('-2', 'O', '3')}` },
+      { id: 'L3', formula: 'Ca<span class="text-rose-600 underline decoration-2">C</span>O<sub>3</sub>', targetEl: 'C', solved: `${renderOxAtom('+2', 'Ca')}${renderOxAtom('+4', 'C')}${renderOxAtom('-2', 'O', '3')}` },
+      { id: 'L4', formula: '<span class="text-rose-600 underline decoration-2">Cu</span>FeS<sub>2</sub> (quặng chalcopyrite)', targetEl: 'Cu', solved: `${renderOxAtom('+2', 'Cu')}${renderOxAtom('+2', 'Fe')}${renderOxAtom('-2', 'S', '2')}` }
+    ];
+
+    const S5_RIGHT = [
+      { id: 'R1', badge: '+4', desc: 'Số oxi hóa của Carbon trong đá vôi' },
+      { id: 'R2', badge: '+2', desc: 'Số oxi hóa của Copper trong chalcopyrite' },
+      { id: 'R3', badge: '+5', desc: 'Số oxi hóa của Phosphorus trong phân lân' },
+      { id: 'R4', badge: '+5', desc: 'Số oxi hóa của Chlorine trong thuốc pháo' }
+    ];
+
+    // Lưu ý: L1 (P -> +5) nối R3; L2 (Cl -> +5) nối R4; L3 (C -> +4) nối R1; L4 (Cu -> +2) nối R2
+    // Để học sinh không nhầm hai thẻ +5, ta ghi rõ mô tả đi kèm từng thẻ số oxi hóa!
+    const S5_CORRECT_MAP = { L1: 'R3', L2: 'R4', L3: 'R1', L4: 'R2' };
+
+    function renderStage5() {
+      const matches = state.s5Matches;
+
+      return `
+        <div class="space-y-4">
+          <p class="text-sm text-slate-600 font-bold leading-relaxed">
+            💎 Chạm chọn một <strong>Hợp chất (Cột Trái)</strong>, sau đó chạm vào <strong>Số oxi hóa tương ứng của nguyên tố gạch chân (Cột Phải)</strong> để mở khóa Rương Kho Báu (5 điểm / cặp đúng):
+          </p>
+
+          <!-- Cột Trái -->
+          <div class="space-y-2">
+            <div class="text-xs font-black uppercase tracking-wider text-rose-700">📌 Cột 1: Công thức hợp chất</div>
+            ${S5_LEFT.map(item => {
+              const matchedR = matches[item.id];
+              const isFocus = !state.s5Submitted && state.s5ActiveLeft === item.id;
+              let cls = 'bg-slate-50 border-slate-200 text-slate-900';
+              if (state.s5Submitted) {
+                cls = (matchedR === S5_CORRECT_MAP[item.id])
+                  ? 'bg-emerald-50 border-emerald-500 text-emerald-950'
+                  : 'bg-rose-50 border-rose-500 text-rose-950';
+              } else if (isFocus) {
+                cls = 'bg-rose-50 border-rose-500 ring-2 ring-rose-200';
+              } else if (matchedR) {
+                cls = 'bg-amber-50 border-amber-400';
+              }
+
+              const rObj = S5_RIGHT.find(r => r.id === matchedR);
+
+              return `
+                <button type="button" onclick="selectS5Left('${item.id}')" ${state.s5Submitted ? 'disabled' : ''}
+                  class="touch-btn w-full p-3 rounded-2xl border-2 flex items-center justify-between gap-2 text-left ${cls}">
+                  <div class="font-black text-base sm:text-lg">${item.formula}</div>
+                  <span class="px-3 py-1 rounded-xl text-xs sm:text-sm font-display font-black flex-shrink-0
+                    ${rObj ? 'bg-amber-500 text-slate-950 shadow' : 'bg-white border border-slate-300 text-slate-500'}">
+                    ${rObj ? `${item.targetEl}: ${rObj.badge}` : 'Chạm chọn'}
+                  </span>
+                </button>
+              `;
+            }).join('')}
+          </div>
+
+          <!-- Cột Phải -->
+          <div class="space-y-2 pt-1">
+            <div class="text-xs font-black uppercase tracking-wider text-indigo-700">✨ Cột 2: Thẻ số oxi hóa</div>
+            <div class="grid grid-cols-1 gap-2">
+              ${S5_RIGHT.map(rItem => {
+                const linkedLeftId = Object.keys(matches).find(k => matches[k] === rItem.id);
+                const linkedLeftObj = S5_LEFT.find(l => l.id === linkedLeftId);
+
+                let cls = 'bg-white border-slate-200 text-slate-800 hover:bg-indigo-50';
+                if (state.s5Submitted) {
+                  const ok = linkedLeftId && S5_CORRECT_MAP[linkedLeftId] === rItem.id;
+                  cls = ok ? 'bg-emerald-50 border-emerald-500' : 'bg-rose-50 border-rose-400';
+                } else if (linkedLeftObj) {
+                  cls = 'bg-indigo-50 border-indigo-400';
+                }
+
+                return `
+                  <button type="button" onclick="selectS5Right('${rItem.id}')" ${state.s5Submitted ? 'disabled' : ''}
+                    class="touch-btn w-full p-3 rounded-2xl border-2 flex items-center justify-between gap-3 text-left ${cls}">
+                    <div class="flex items-center gap-3">
+                      <span class="px-3 py-1.5 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 text-white font-display font-black text-base shadow flex-shrink-0">
+                        ${rItem.badge}
+                      </span>
+                      <span class="text-xs sm:text-sm font-bold text-slate-700 leading-snug">${rItem.desc}</span>
+                    </div>
+                    ${linkedLeftObj ? `
+                      <span class="px-2 py-0.5 rounded bg-indigo-600 text-white text-[11px] font-extrabold flex-shrink-0">
+                        Đã nối ${linkedLeftObj.targetEl}
+                      </span>
+                    ` : ''}
+                  </button>
+                `;
+              }).join('')}
+            </div>
+          </div>
+
+          ${!state.s5Submitted ? `
+            <button type="button" onclick="submitStage5()"
+              class="touch-btn w-full py-3.5 px-5 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-extrabold text-sm sm:text-base shadow">
+              🔓 MỞ RƯƠNG KHO BÁU (CHỐT 4 CẶP)
+            </button>
+          ` : `
+            <div class="p-4 rounded-2xl bg-slate-900 text-white space-y-2">
+              <div class="text-xs font-extrabold text-amber-300">🏆 Toàn bộ công thức gắn số oxi hóa chuẩn xác:</div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                ${S5_LEFT.map(item => `
+                  <div class="bg-slate-800 px-3 py-2 rounded-xl border border-slate-700 flex items-center justify-center">
+                    <span class="chem-formula text-base sm:text-lg font-black">${item.solved}</span>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          `}
+        </div>
+      `;
+    }
+
+    function selectS5Left(leftId) {
+      if (state.s5Submitted) return;
+      sfxTap();
+      state.s5ActiveLeft = leftId;
+      render();
+    }
+
+    function selectS5Right(rightId) {
+      if (state.s5Submitted) return;
+      if (!state.s5ActiveLeft) {
+        showToast('Hãy chạm chọn một hợp chất ở Cột 1 trước, rồi chạm thẻ số oxi hóa ở Cột 2 nhé!', '👆');
+        return;
+      }
+      sfxTap();
+      Object.keys(state.s5Matches).forEach(k => {
+        if (state.s5Matches[k] === rightId) delete state.s5Matches[k];
+      });
+      state.s5Matches[state.s5ActiveLeft] = rightId;
+      const nextUnlinked = S5_LEFT.find(l => !state.s5Matches[l.id]);
+      state.s5ActiveLeft = nextUnlinked ? nextUnlinked.id : null;
+      render();
+    }
+
+    function submitStage5() {
+      if (Object.keys(state.s5Matches).length < 4) {
+        showToast('Bạn hãy nối đủ cả 4 cặp công thức và số oxi hóa nhé!', '💎');
+        return;
+      }
+      state.s5Submitted = true;
+      let okPairs = 0;
+      Object.keys(S5_CORRECT_MAP).forEach(k => {
+        if (state.s5Matches[k] === S5_CORRECT_MAP[k]) okPairs++;
+      });
+      state.stageScores[5] = okPairs * 5;
+      recordAnswerResult(okPairs >= 3);
+      if (okPairs >= 3) sfxCorrect(); else sfxWrong();
+      render();
+    }
+
+    /* =========================================================================
+       8. MÀN HÌNH TỔNG KẾT & THẺ CHỨNG NHẬN ĐỈNH CAO SỐ OXI HÓA
+       ========================================================================= */
+    function renderSummaryScreen() {
+      const total = getTotalScore();
+      const roleObj = AVATAR_ROLES.find(r => r.id === state.selectedRole) || AVATAR_ROLES[0];
+      let titleBadge = '';
+      let advice = '';
+
+      if (total >= 90) {
+        titleBadge = '👑 BẬC THẦY SỐ OXI HÓA';
+        advice = 'Phong độ đỉnh cao! Bạn đã nắm vững mọi quy tắc từ đơn chất, hợp chất đặc biệt (OF₂, Na₂O₂, CaH₂, FeS₂) đến ion phức tạp (NH₄NO₃, Cr₂O₇²⁻) và chuẩn bị sẵn sàng cho chương Phản ứng oxi hóa – khử!';
+      } else if (total >= 70) {
+        titleBadge = '🌟 CHUYÊN GIA PHẢN ỨNG';
+        advice = 'Rất xuất sắc! Bạn đã giải mã thành công phần lớn các hợp chất. Hãy xem lại những trường hợp ngoại lệ như FeS₂, OF₂ hoặc số oxi hóa trung bình Fe₃O₄ để chinh phục trọn vẹn 100 điểm nhé!';
+      } else {
+        titleBadge = '🌱 NHÀ THÁM HIỂM TIỀM NĂNG';
+        advice = 'Chúc mừng bạn đã về đích! Bạn hãy ghi nhớ 4 Quy Tắc Vàng (tổng số oxi hóa trong phân tử = 0, trong ion = điện tích ion) và thử luyện tập lại một vòng để bứt phá điểm số nhé!';
+      }
+
+      const today = new Date();
+      const dateStr = `${String(today.getDate()).padStart(2, '0')}/${String(today.getMonth() + 1).padStart(2, '0')}/${today.getFullYear()}`;
+
+      const main = document.getElementById('app-main');
+      main.innerHTML = `
+        <div class="space-y-4 animate-slide">
+          <!-- Thẻ Chứng Nhận Sáng Rõ Dễ Chụp Màn Hình Nộp Bài -->
+          <div class="light-panel rounded-3xl p-5 sm:p-6 border-4 border-amber-400 relative overflow-hidden">
+            <div class="flex items-center justify-between border-b-2 border-slate-200 pb-3 mb-4">
+              <div class="flex items-center gap-2">
+                <span class="text-2xl">🏅</span>
+                <div>
+                  <div class="text-[11px] font-black uppercase tracking-wider text-amber-700">Chứng Nhận Hoàn Thành</div>
+                  <div class="text-xs font-bold text-slate-500">Hóa học 10 • Ngày ${dateStr}</div>
+                </div>
+              </div>
+              <span class="px-2.5 py-1 rounded-full bg-indigo-100 text-indigo-900 font-extrabold text-xs border border-indigo-200">
+                ${roleObj.icon} ${roleObj.label}
+              </span>
+            </div>
+
+            <div class="text-center my-2">
+              <div class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-1">Chứng nhận Nhà thám hiểm</div>
+              <h2 class="font-display font-black text-2xl sm:text-3xl text-slate-900 mb-1">
+                ${escapeHTML(state.playerName)}
+              </h2>
+              <div class="inline-block px-3.5 py-1 rounded-full bg-slate-900 text-amber-300 font-extrabold text-xs sm:text-sm mb-3">
+                Lớp: ${escapeHTML(state.playerClass)}
+              </div>
+
+              <div class="my-2 flex items-center justify-center gap-3">
+                <div class="px-6 py-3 rounded-2xl bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-400 shadow-sm">
+                  <span class="text-xs font-extrabold uppercase text-slate-500 block">Tổng điểm chinh phục</span>
+                  <div class="font-display font-black text-4xl sm:text-5xl text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-rose-600">
+                    ${total}<span class="text-xl text-slate-400">/100đ</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-3 font-display font-black text-base sm:text-lg text-indigo-700">
+                ${titleBadge} • Combo tối đa: 🔥 x${state.maxCombo}
+              </div>
+              <p class="text-xs sm:text-sm text-slate-600 font-semibold mt-1.5 leading-relaxed">
+                ${advice}
+              </p>
+            </div>
+
+            <!-- Bảng phân tích điểm chi tiết 5 chặng -->
+            <div class="mt-4 pt-3.5 border-t border-slate-200">
+              <div class="text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-2.5 text-center">
+                📊 Bảng Phân Tích Điểm Từng Chặng
+              </div>
+              <div class="space-y-1.5 text-xs sm:text-sm font-bold">
+                ${STAGES_INFO.map(st => {
+                  const sc = state.stageScores[st.id];
+                  const perfect = sc === st.maxPts;
+                  return `
+                    <div class="flex items-center justify-between gap-2 bg-slate-50 px-3 py-2 rounded-xl border border-slate-200">
+                      <span class="text-slate-800">${st.icon} Chặng ${st.id}: ${st.title}</span>
+                      <span class="font-black px-2.5 py-0.5 rounded-lg flex-shrink-0 ${perfect ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-900'}">
+                        ${sc}/${st.maxPts}đ
+                      </span>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+
+            <div class="mt-4 text-center text-xs font-extrabold text-amber-900 bg-amber-100 py-2.5 px-3 rounded-xl border border-amber-300">
+              📸 Hãy chụp ảnh màn hình Thẻ Chứng Nhận này để gửi nộp bài cho Giáo viên nhé!
+            </div>
+          </div>
+
+          <button type="button" onclick="restartAdventure()"
+            class="touch-btn w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500 hover:from-amber-500 hover:to-rose-600 text-slate-950 font-black text-base sm:text-lg shadow-lg flex items-center justify-center gap-2">
+            <span>🔄 LUYỆN TẬP LẠI ĐỂ ĐẠT 100 ĐIỂM</span>
+          </button>
+        </div>
+      `;
+    }
+
+    function escapeHTML(str) {
+      return String(str).replace(/[&<>"']/g, m => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[m]));
+    }
+
+    function restartAdventure() {
+      sfxTap();
+      state = {
+        screen: 'stage',
+        playerName: state.playerName,
+        playerClass: state.playerClass,
+        selectedRole: state.selectedRole,
+        stage: 1,
+        combo: 0,
+        maxCombo: 0,
+        stageScores: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 },
+        s1Index: 0,
+        s1Answers: [null, null, null, null],
+        s1Checked: [false, false, false, false],
+        s2Values: ['', '', '', '', ''],
+        s2ActiveIdx: 0,
+        s2Submitted: false,
+        s3OrderN: [],
+        s3CheckedN: false,
+        s3OrderS: [],
+        s3CheckedS: false,
+        s4Answers: { a: null, b: null, c: null, d: null },
+        s4Submitted: false,
+        s5Matches: {},
+        s5ActiveLeft: null,
+        s5Submitted: false
+      };
+      render();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* =========================================================================
+       9. PHÁO HOA CHÚC MỪNG & RENDER CHÍNH
+       ========================================================================= */
+    function launchConfetti() {
+      const canvas = document.getElementById('confetti-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const colors = ['#F59E0B', '#06B6D4', '#10B981', '#EC4899', '#8B5CF6', '#F97316'];
+      const pieces = Array.from({ length: 100 }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height - canvas.height,
+        w: Math.random() * 9 + 5,
+        h: Math.random() * 6 + 4,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        vy: Math.random() * 3.5 + 2,
+        vx: Math.random() * 2 - 1,
+        rot: Math.random() * 360,
+        vrot: Math.random() * 8 - 4
+      }));
+
+      let frame = 0;
+      function animate() {
+        frame++;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        pieces.forEach(p => {
+          p.y += p.vy;
+          p.x += p.vx;
+          p.rotation += p.vrot;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rot * Math.PI) / 180);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+          ctx.restore();
+        });
+        if (frame < 190) requestAnimationFrame(animate);
+        else ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+      animate();
+    }
+
+    function render() {
+      updateHUD();
+      if (state.screen === 'welcome') renderWelcomeScreen();
+      else if (state.screen === 'stage') renderStageScreen();
+      else if (state.screen === 'summary') renderSummaryScreen();
+    }
+
+    window.addEventListener('resize', () => {
+      const canvas = document.getElementById('confetti-canvas');
+      if (canvas) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+    });
+
+    window.onload = function() {
+      render();
+    };
+  </script>
+</body>
+</html>
